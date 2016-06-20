@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+<p><strong>Current Temp: {{ "%.1f"|format(config._sensor.value) }}</strong></p>
+<p><strong>Light Starts: {{ config.time_start }} Ends: {{ config.time_end }}</strong></p>
+<div class="brooder fullwidth">
+{% for data in sensor_list %}
+<a href="{{ url_for('brooder.node', nid=data.id) }}">
+<div class="node{{ " old" if data._sensor.age() > 3600 }}">
+<div class="title">{{ data.name }}</div>
+<div class="data">
+<span class="current">{{ data.current_value}}</span>
+<span class="max">{{ data.max_value }}</span>
+<div class="indicators">
+<span class="light {{ "on" if data.light_state else "off" }}"><i class="fa fa-fw fa-lightbulb-o"></i></span>
+<span class="heat {{ "on" if data.heater_state else "off" }}"><i class="fa fa-fw fa-fire"></i></span>
+</div>
+</div>
+</div>
+</a>
+{% endfor %}
+</div>
+{% endblock %}

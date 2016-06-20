@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>{{ node.name }}</h1>
+<div class="brooder item fullwidth">
+<div>Last Updated {{ "%d"|format(node._sensor.age()) }} seconds ago</div>
+<div class="node{{ " old" if node._sensor.age() > 3600 }}">
+ <div class="data">
+  <span class="current">{{ node.current_value }}</span>
+  <span class="max">{{ node.max_value }}</span>
+  <div class="indicators">
+   <span class="light {{ "on" if node.light_state else "off" }}"><i class="fa fa-fw fa-lightbulb-o"></i></span>
+   <span class="heat {{ "on" if node.heater_state else "off" }}"><i class="fa fa-fw fa-fire"></i></span>
+  </div>
+ </div>
+</div>
+<form method="post" id="tempset">
+  <button type="submit" name="{{ "disable" if node.enabled else "enable"}}" value="1">{{ "Disable" if node.enabled else "Enable" }}</button>
+  <button type="submit" name="{{ "stop" if node.cycle_enabled else "start"}}" value="1">{{ "Stop" if node.cycle_enabled else "Start" }} Cycle</button>
+  <button type="submit" name="default" value="1">Default</button>
+  <button type="submit" name="refresh" value="1">Refresh</button>
+  <input type="text" size="5" name="temp" value="{{ node.max_value }}" /> <button type="submit" name="set" value="1">Set Temp</button>
+</form>
+<a href="{{ url_for('brooder.index') }}">Back to list</a>
+</div>
+{% endblock %}

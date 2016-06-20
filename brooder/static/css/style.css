@@ -1,0 +1,90 @@
+/* Basic stylesheet */
+body { width: 100%; }
+.display {
+ max-width: 800px;
+ background: wheat;
+ text-align: center;
+ border: 1px solid #ccc;
+ box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+ margin-left: auto;
+ margin-right: auto;
+ margin-top: 1em;
+}
+.temp { font-size: 120px; }
+.buttons div,
+.buttons li {
+ display: inline-block;
+ margin: 1.5em;
+ padding: 1em 2em;
+ border: 1px solid #ccc;
+}
+.on {background: lightgreen; }
+.off {background: #888; color: white; }
+.ok {color: green; }
+.fail { color: red; }
+.fullwidth { width: 100%; }
+.node { width: auto; margin: 1em; padding: 1em; float: left; background: whitesmoke; }
+.node.old { opacity: 0.5; }
+.brooder a {
+ text-decoration: none;
+ color: black;
+}
+.node::after {
+ display: block;
+ content: '';
+ clear: both;
+}
+.node .title {
+ font-weight: bold;
+ font-size: 120%;
+}
+.data {
+  font-size: 300%;
+}
+.current::after {
+ content: "\2103";
+}
+.max {
+ font-size: 90%;
+}
+.max::before {
+  content: "/";
+}
+.light.on {
+ color: yellow;
+}
+.heat.on {
+ color: red;
+}
+input[type="submit"] {
+  padding: 1em;
+  font-weight: bold;
+  margin: 0 1em;
+}
+input[type="text"] {
+  width: 3em;
+  font-size: 1.3em;
+  padding: 0.5em;
+}
+.times span {
+  font-size: 50%;
+}
+
+.times .start::before {
+  content: 'On: ';
+}
+.times .end::before {
+  content: 'Off: ';
+}
+#tempset button {
+  font-weight: bold;
+  font-size: 1.7em;
+  margin: 0.5em;
+}
+#tempset {
+  clear: left;
+  margin-bottom: 1em;
+}
+@media (max-width: 767px) {
+ .temp { font-size: 80px; }
+}
