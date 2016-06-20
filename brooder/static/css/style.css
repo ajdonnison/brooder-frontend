@@ -24,6 +24,7 @@ body { width: 100%; }
 .fail { color: red; }
 .fullwidth { width: 100%; }
 .node { width: auto; margin: 1em; padding: 1em; float: left; background: whitesmoke; }
+.node.disabled { background: #fee }
 .node.old { opacity: 0.5; }
 .brooder a {
  text-decoration: none;

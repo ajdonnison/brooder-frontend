@@ -5,7 +5,7 @@
 <div class="brooder fullwidth">
 {% for data in sensor_list %}
 <a href="{{ url_for('brooder.node', nid=data.id) }}">
-<div class="node{{ " old" if data._sensor.age() > 3600 }}">
+<div class="node{{ " old" if data._sensor.age() > 3600 }}{{ " disabled" if not data.enabled }}">
 <div class="title">{{ data.name }}</div>
 <div class="data">
 <span class="current">{{ data.current_value}}</span>
