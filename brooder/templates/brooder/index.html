@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
+{% block head %}
+<meta http-equiv="refresh" content="20" />
+{% endblock %}
 {% block body %}
+<p><a href="{{ url_for('brooder.config') }}">Config</a></p>
 <p><strong>Current Temp: {{ "%.1f"|format(config._sensor.value) }}</strong></p>
 <p><strong>Light Starts: {{ config.time_start }} Ends: {{ config.time_end }}</strong></p>
 <div class="brooder fullwidth">

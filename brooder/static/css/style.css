@@ -23,8 +23,8 @@ body { width: 100%; }
 .ok {color: green; }
 .fail { color: red; }
 .fullwidth { width: 100%; }
-.node { width: auto; margin: 1em; padding: 1em; float: left; background: whitesmoke; }
-.node.disabled { background: #fee }
+.node { width: auto; margin: 1em; padding: 1em; float: left; background: #dfd; }
+.node.disabled { background: #fdd }
 .node.old { opacity: 0.5; }
 .brooder a {
  text-decoration: none;
@@ -63,9 +63,10 @@ input[type="submit"] {
   margin: 0 1em;
 }
 input[type="text"] {
-  width: 3em;
   font-size: 1.3em;
   padding: 0.5em;
+  width: 4em;
+  text-align: right;
 }
 .times span {
   font-size: 50%;
@@ -88,4 +89,26 @@ input[type="text"] {
 }
 @media (max-width: 767px) {
  .temp { font-size: 80px; }
+}
+.config div {
+  padding: 1em 0;
+}
+.entity {
+  max-width: 350px;
+  width: 100%;
+}
+.entity label {
+  float: left;
+  margin-top: 1em;
+}
+.entity input {
+  float: right;
+}
+.entity::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.actions {
+  clear: both;
 }

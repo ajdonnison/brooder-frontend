@@ -1,9 +1,12 @@
 {% extends "layout.html" %}
+{% block head %}
+<meta http-equiv="refresh" content="20"/>
+{% endblock %}
 {% block body %}
 <h1>{{ node.name }}</h1>
 <div class="brooder item fullwidth">
 <div>Last Updated {{ "%d"|format(node._sensor.age()) }} seconds ago</div>
-<div class="node{{ " old" if node._sensor.age() > 3600 }}">
+<div class="node{{ " old" if node._sensor.age() > 3600 }}{{ " disabled" if not node.enabled }}">
  <div class="data">
   <span class="current">{{ node.current_value }}</span>
   <span class="max">{{ node.max_value }}</span>

@@ -15,7 +15,6 @@ def index():
   sensor_list = Brooder().listAll()
   config = Config()
   config._sensor = Sensor(id=config.reference)
-  config.commit()
   for sensor in sensor_list:
     sensor.current_value = round(sensor._sensor.value, 1)
     if sensor.set_temperature:
@@ -28,6 +27,23 @@ def index():
 
   return render_template('brooder/index.html', sensor_list = sensor_list, config = config)
 
+@mod.route('/config/', methods=['GET', 'POST'])
+def config():
+  """
+    Set up configuration
+  """
+  config = Config()
+  changed = False
+  if request.method == "POST":
+    for key in request.form:
+      if config.setValueFromForm(key, request.form[key]):
+        changed = True
+    if changed:
+      flash('Config saved')
+      config.save()
+
+  return render_template('brooder/config.html', config=config)
+
 @mod.route('/node/<nid>/', methods=['GET', 'POST'])
 def node(nid):
   """
@@ -37,7 +53,6 @@ def node(nid):
   node.load(int(nid)) # This avoids calling the pin init.
   node._sensor = Sensor(id=node.sensor)
   config = Config()
-  config.commit()
 
   node.current_value = round(node._sensor.value,1)
   if node.set_temperature:
@@ -59,6 +74,8 @@ def node(nid):
       node.setCycle(True)
     elif ( 'set' in request.form ):
       node.setTemperature(request.form['temp'])
+    elif ( 'default' in request.form and request.form['default'] == '1' ):
+      node.setDefault()
     elif ('refresh' in request.form):
       pass
 
