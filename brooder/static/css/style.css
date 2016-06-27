@@ -66,11 +66,6 @@ input[type="text"] {
 .entity input {
   float: right;
 }
-.entity::after {
-  content: '';
-  display: block;
-  clear: both;
-}
 .actions {
   clear: both;
 }
