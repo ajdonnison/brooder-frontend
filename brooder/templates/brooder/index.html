@@ -9,8 +9,9 @@
 </div>
 <div class="container-fluid">
 {% for data in sensor_list %}
+<div class="col-sm-3 col-xs-12">
 <a href="{{ url_for('brooder.node', nid=data.id) }}">
-<div class="node{{ " old" if data._sensor.age() > 3600 }}{{ " disabled" if not data.enabled }} col-sm-3 col-xs-12">
+<div class="node{{ " old" if data._sensor.age() > 3600 }}{{ " disabled" if not data.enabled }}">
 <div class="title">{{ data.name }}</div>
 <div class="data">
 <span class="current">{{ data.current_value}}</span>
@@ -18,6 +19,7 @@
 <div class="indicators">
 <span class="light {{ "on" if data.light_state else "off" }}"><i class="fa fa-fw fa-lightbulb-o"></i></span>
 <span class="heat {{ "on" if data.heater_state else "off" }}"><i class="fa fa-fw fa-fire"></i></span>
+</div>
 </div>
 </div>
 </div>

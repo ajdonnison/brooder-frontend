@@ -1,39 +1,16 @@
 /* Basic stylesheet */
 body { width: 100%; }
-.display {
- max-width: 800px;
- background: wheat;
- text-align: center;
- border: 1px solid #ccc;
- box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
- margin-left: auto;
- margin-right: auto;
- margin-top: 1em;
-}
-.temp { font-size: 120px; }
-.buttons div,
-.buttons li {
- display: inline-block;
- margin: 1.5em;
- padding: 1em 2em;
- border: 1px solid #ccc;
-}
 .on {background: lightgreen; }
 .off {background: #888; color: white; }
 .ok {color: green; }
 .fail { color: red; }
 .fullwidth { width: 100%; }
-.node { width: auto; margin: 1em; padding: 1em; float: left; background: #dfd; }
+.node { width: 100%; margin: 1em; padding: 1em; float: left; background: #dfd;}
 .node.disabled { background: #fdd }
 .node.old { opacity: 0.5; }
 .brooder a {
  text-decoration: none;
  color: black;
-}
-.node::after {
- display: block;
- content: '';
- clear: both;
 }
 .node .title {
  font-weight: bold;
@@ -57,15 +34,10 @@ body { width: 100%; }
 .heat.on {
  color: red;
 }
-input[type="submit"] {
-  padding: 1em;
-  font-weight: bold;
-  margin: 0 1em;
-}
 input[type="text"] {
   font-size: 1.3em;
-  padding: 0.5em;
-  width: 4em;
+  padding: 0 0.2em;
+  width: 6em;
   text-align: right;
 }
 .times span {
@@ -78,11 +50,6 @@ input[type="text"] {
 .times .end::before {
   content: 'Off: ';
 }
-#tempset button {
-  font-weight: bold;
-  font-size: 1.7em;
-  margin: 0.5em;
-}
 #tempset {
   clear: left;
   margin-bottom: 1em;
@@ -91,15 +58,10 @@ input[type="text"] {
  .temp { font-size: 80px; }
 }
 .config div {
-  padding: 1em 0;
-}
-.entity {
-  max-width: 350px;
-  width: 100%;
+  padding: 0.3em 0;
 }
 .entity label {
   float: left;
-  margin-top: 1em;
 }
 .entity input {
   float: right;

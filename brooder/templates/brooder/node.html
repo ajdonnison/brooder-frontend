@@ -17,11 +17,15 @@
  </div>
 </div>
 <form method="post" id="tempset">
-  <button type="submit" name="{{ "disable" if node.enabled else "enable"}}" value="1">{{ "Disable" if node.enabled else "Enable" }}</button>
-  <button type="submit" name="{{ "stop" if node.cycle_enabled else "start"}}" value="1">{{ "Stop" if node.cycle_enabled else "Start" }} Cycle</button>
-  <button type="submit" name="default" value="1">Default</button>
-  <button type="submit" name="refresh" value="1">Refresh</button>
-  <input type="text" size="5" name="temp" value="{{ node.max_value }}" /> <button type="submit" name="set" value="1">Set Temp</button>
+  <div class="container">
+  <button type="submit" class="btn" name="{{ "disable" if node.enabled else "enable"}}" value="1">{{ "Disable" if node.enabled else "Enable" }}</button>
+  <button type="submit" class="btn" name="{{ "stop" if node.cycle_enabled else "start"}}" value="1">{{ "Stop" if node.cycle_enabled else "Start" }} Cycle</button>
+  <button type="submit" class="btn" name="default" value="1">Default</button>
+  <button type="submit" class="btn" name="refresh" value="1">Refresh</button>
+  </div>
+  <div class="container">
+  <input type="text" size="5" name="temp" value="{{ node.max_value }}" /> <button type="submit" class="btn" name="set" value="1">Set Temp</button>
+  </div>
 </form>
 </div>
 {% endblock %}
