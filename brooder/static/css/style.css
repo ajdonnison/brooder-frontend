@@ -5,7 +5,7 @@ body { width: 100%; }
 .ok {color: green; }
 .fail { color: red; }
 .fullwidth { width: 100%; }
-.node { width: 100%; margin: 1em; padding: 1em; float: left; background: #dfd;}
+.node { width: 100%; margin: 1em; padding: 1em; float: left; background: #dfd; text-align: center;}
 .node.disabled { background: #fdd }
 .node.old { opacity: 0.5; }
 .brooder a {
