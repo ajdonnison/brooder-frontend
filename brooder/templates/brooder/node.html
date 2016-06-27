@@ -4,7 +4,7 @@
 {% endblock %}
 {% block body %}
 <h1>{{ node.name }}</h1>
-<div class="brooder item fullwidth">
+<div class="col-sm-3">
 <div>Last Updated {{ "%d"|format(node._sensor.age()) }} seconds ago</div>
 <div class="node{{ " old" if node._sensor.age() > 3600 }}{{ " disabled" if not node.enabled }}">
  <div class="data">
@@ -23,6 +23,5 @@
   <button type="submit" name="refresh" value="1">Refresh</button>
   <input type="text" size="5" name="temp" value="{{ node.max_value }}" /> <button type="submit" name="set" value="1">Set Temp</button>
 </form>
-<a href="{{ url_for('brooder.index') }}">Back to list</a>
 </div>
 {% endblock %}

@@ -3,13 +3,14 @@
 <meta http-equiv="refresh" content="20" />
 {% endblock %}
 {% block body %}
-<p><a href="{{ url_for('brooder.config') }}">Config</a></p>
+<div class="col-xs-12">
 <p><strong>Current Temp: {{ "%.1f"|format(config._sensor.value) }}</strong></p>
 <p><strong>Light Starts: {{ config.time_start }} Ends: {{ config.time_end }}</strong></p>
-<div class="brooder fullwidth">
+</div>
+<div class="container-fluid">
 {% for data in sensor_list %}
 <a href="{{ url_for('brooder.node', nid=data.id) }}">
-<div class="node{{ " old" if data._sensor.age() > 3600 }}{{ " disabled" if not data.enabled }}">
+<div class="node{{ " old" if data._sensor.age() > 3600 }}{{ " disabled" if not data.enabled }} col-sm-3 col-xs-12">
 <div class="title">{{ data.name }}</div>
 <div class="data">
 <span class="current">{{ data.current_value}}</span>

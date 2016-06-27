@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +7,35 @@
 <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 <meta http-equiv="pragma" content="no-cache" />
 {%block head %}{% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"></link>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"></link>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-<script src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
 <title>{{ title }}</title>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#thenav" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="thenav">
+      <ul class="nav navbar-nav">
+        <li><a href="{{ url_for('brooder.index') }}">Home</a></li>
+        <li><a href="{{ url_for('brooder.config') }}">Config</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
 {%block body %}{% endblock %}
+</div>
+<script src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>
