@@ -75,4 +75,4 @@ def node(nid):
     elif ('refresh' in request.form):
       pass
 
-  return render_template('brooder/node.html', node = node)
+  return render_template('brooder/node.html', node = node, config=config)

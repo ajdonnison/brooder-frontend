@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block head %}
-<meta http-equiv="refresh" content="20"/>
+<!-- <meta http-equiv="refresh" content="20"/> -->
 {% endblock %}
 {% block body %}
 <h1>{{ node.name }}</h1>
@@ -19,15 +19,18 @@
 <form method="post" id="tempset">
   <input type="hidden" id="power" name="power" value="" />
   <input type="hidden" id="cycle" name="cycle" value="" />
-  <div class="container-fluid">
+  <div class="row">
   <div class="button col-xs-6">Power <a href="#" class="toggler{{ " on" if node.enabled else " off" }}" data-target="power" data-state="{{ "off" if node.enabled else "on" }}"><i class="fa fa-fw fa-toggle-{{ "on" if node.enabled else "off" }}"></i></a></div>
   <div class="button col-xs-6">Cycle <a href="#" class="toggler{{ " on" if node.cycle_enabled else " off" }}" data-target="cycle" data-state="{{ "off" if node.cycle_enabled else "on" }}"><i class="fa fa-fw fa-toggle-{{ "on" if node.cycle_enabled else "off" }}"></i></a></div>
   </div>
-  <div class="container-fluid">
-   <div class="col-xs-6"><input type="text" size="5" name="temp" value="{{ node.max_value }}" /></div>
+  <div class="row">
+   <div id="temperature"></div>
+  </div>
+  <div class="row">
+   <div class="col-xs-6"><input type="text" size="5" id="temp-txt" name="temp" value="{{ node.max_value }}" /></div>
    <div class="col-xs-6"><button type="submit" class="btn" name="set" value="1">Set Temp</button></div>
   </div>
-  <div class="container-fluid">
+  <div class="row">
     <div class="col-xs-6"><button type="submit" class="btn" name="default" value="1">Default</button></div>
     <div class="col-xs-6"><button type="submit" class="btn" name="refresh" value="1">Refresh</button></div>
   </div>
@@ -40,6 +43,17 @@ $('.toggler').click(function() {
   var name = $(this).data('target');
   $('#' + name).val($(this).data('state'));
   $('#tempset').submit();
+});
+$('#temperature').slider({
+  min: {{ config.temp_low }},
+  max: {{ config.temp_high }},
+  value: {{ node.set_temperature if node.set_temperature else config.temp_high }},
+  change: function(event, ui) {
+    $('#temp-txt').val(ui.value);
+  },
+});
+$('#temp-txt').change( function() {
+  $('#temperature').slider("value", $(this).val());
 });
 </script>
 {% endblock %}

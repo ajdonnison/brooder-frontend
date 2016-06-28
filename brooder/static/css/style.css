@@ -57,6 +57,9 @@ input[type="text"] {
   clear: left;
   margin-bottom: 1em;
 }
+#tempset div.row {
+  padding-bottom: 1em;
+}
 @media (max-width: 767px) {
  .temp { font-size: 80px; }
 }
