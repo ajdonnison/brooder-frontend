@@ -64,14 +64,10 @@ def node(nid):
 
   if request.method == "POST":
     # Find what we've been given and update the config
-    if ( 'disable' in request.form):
-      node.setEnabled(False)
-    elif ( 'enable' in request.form):
-      node.setEnabled(True)
-    elif ( 'stop' in request.form ):
-      node.setCycle(False)
-    elif ( 'start' in request.form ):
-      node.setCycle(True)
+    if ('power' in request.form and request.form['power']):
+      node.setEnabled(request.form['power'] == 'on')
+    if ('cycle' in request.form and request.form['cycle']):
+      node.setCycle(request.form['cycle'] == 'on')
     elif ( 'set' in request.form ):
       node.setTemperature(request.form['temp'])
     elif ( 'default' in request.form and request.form['default'] == '1' ):

@@ -2,6 +2,9 @@
 body { width: 100%; }
 .on {background: lightgreen; }
 .off {background: #888; color: white; }
+.button .off {background: transparent; color: #888; }
+.button .on { background: transparent; color: green; }
+.button { font-size: 2em; }
 .ok {color: green; }
 .fail { color: red; }
 .fullwidth { width: 100%; }
