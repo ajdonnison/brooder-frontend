@@ -74,5 +74,6 @@ def node(nid):
       node.setDefault()
     elif ('refresh' in request.form):
       pass
+    node.load(node.id)
 
   return render_template('brooder/node.html', node = node, config=config)
