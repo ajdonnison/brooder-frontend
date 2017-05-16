@@ -15,6 +15,7 @@ def index():
   sensor_list = Brooder().listAll()
   config = Config()
   config._sensor = Sensor(id=config.reference)
+  title = str(round(config._sensor.value, 1)) + 'C Brooder Control'
   for sensor in sensor_list:
     sensor.current_value = round(sensor._sensor.value, 1)
     if sensor.set_temperature:
@@ -25,7 +26,7 @@ def index():
       else:
         sensor.max_value = round(config.temp_high, 1)
 
-  return render_template('brooder/index.html', sensor_list = sensor_list, config = config)
+  return render_template('brooder/index.html', sensor_list = sensor_list, config = config, title=title)
 
 @mod.route('/config/', methods=['GET', 'POST'])
 def config():
@@ -42,7 +43,7 @@ def config():
       flash('Config saved')
       config.save()
 
-  return render_template('brooder/config.html', config=config)
+  return render_template('brooder/config.html', config=config, title='Brooder Config')
 
 @mod.route('/node/<nid>/', methods=['GET', 'POST'])
 def node(nid):
@@ -50,6 +51,7 @@ def node(nid):
     Get or set stats on a single sensor
   """
   node = Brooder()
+  nodelist = node.listAll()
   node.load(int(nid)) # This avoids calling the pin init.
   node._sensor = Sensor(id=node.sensor)
   config = Config()
@@ -62,12 +64,22 @@ def node(nid):
   else:
     node.max_value = round(config.temp_high, 1)
 
+  title = str(node.current_value) + 'C ' + node.name
+
+  nodes = []
+  for n in nodelist:
+    if n.id != node.id:
+      nodes.append({'id': n.id, 'name': n.name})
   if request.method == "POST":
     # Find what we've been given and update the config
     if ('power' in request.form and request.form['power']):
       node.setEnabled(request.form['power'] == 'on')
     if ('cycle' in request.form and request.form['cycle']):
       node.setCycle(request.form['cycle'] == 'on')
+    elif ('clone' in request.form and request.form['clone']):
+      clonefrom = Brooder()
+      clonefrom.load(int(request.form['clonefrom']))
+      node.clone(clonefrom)
     elif ( 'set' in request.form ):
       node.setTemperature(request.form['temp'])
     elif ( 'default' in request.form and request.form['default'] == '1' ):
@@ -76,4 +88,4 @@ def node(nid):
       pass
     node.load(node.id)
 
-  return render_template('brooder/node.html', node = node, config=config)
+  return render_template('brooder/node.html', node = node, config=config, nodelist = nodes, title=title)

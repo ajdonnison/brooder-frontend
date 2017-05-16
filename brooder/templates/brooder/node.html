@@ -31,6 +31,14 @@
    <div class="col-xs-6"><button type="submit" class="btn" name="set" value="1">Set Temp</button></div>
   </div>
   <div class="row">
+    <div class="col-xs-6"><select name="clonefrom">
+    {% for o in nodelist %}
+    <option value="{{ o.id }}">{{ o.name }}</option>
+    {% endfor %}
+    </select></div>
+    <div class="col-xs-6"><button type="submit" class="btn" name="clone" value="1">Clone</button></div>
+  </div>
+  <div class="row">
     <div class="col-xs-6"><button type="submit" class="btn" name="default" value="1">Default</button></div>
     <div class="col-xs-6"><button type="submit" class="btn" name="refresh" value="1">Refresh</button></div>
   </div>
