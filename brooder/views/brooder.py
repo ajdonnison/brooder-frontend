@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, session, redirect, url_for, \
 from Brooder.brooder import Brooder
 from Brooder.config import Config
 from Brooder.temp import Sensor
+from datetime import datetime, timedelta
 
 mod = Blueprint('brooder', __name__)
 
@@ -56,7 +57,11 @@ def node(nid):
   node._sensor = Sensor(id=node.sensor)
   config = Config()
 
+  set_node_defaults(node, config)
   node.current_value = round(node._sensor.value,1)
+  cycle_day = datetime.now() - node.cycle_started
+  node.cycle_day = cycle_day.days
+
   if node.set_temperature:
     node.max_value = round(node.set_temperature,1)
   elif node.cycle_enabled:
@@ -76,6 +81,8 @@ def node(nid):
       node.setEnabled(request.form['power'] == 'on')
     if ('cycle' in request.form and request.form['cycle']):
       node.setCycle(request.form['cycle'] == 'on')
+    elif ('cycleday' in request.form ):
+      node.setCycleDay(int(request.form['day']))
     elif ('clone' in request.form and request.form['clone']):
       clonefrom = Brooder()
       clonefrom.load(int(request.form['clonefrom']))
@@ -87,5 +94,20 @@ def node(nid):
     elif ('refresh' in request.form):
       pass
     node.load(node.id)
+    set_node_defaults(node, config)
 
   return render_template('brooder/node.html', node = node, config=config, nodelist = nodes, title=title)
+
+
+def set_node_defaults(node, config):
+
+  node.current_value = round(node._sensor.value,1)
+  cycle_day = datetime.now() - node.cycle_started
+  node.cycle_day = cycle_day.days
+
+  if node.set_temperature:
+    node.max_value = round(node.set_temperature,1)
+  elif node.cycle_enabled:
+    node.max_value = round(config.rampedTemp(node.cycle_started),1)
+  else:
+    node.max_value = round(config.temp_high, 1)
